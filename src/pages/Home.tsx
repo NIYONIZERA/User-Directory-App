@@ -4,7 +4,6 @@ import axios from "axios";
 import { User } from "../types/User";
 import { useUserContext } from "../context/UserContext";
 import { useTheme } from "../context/ThemeContext";
-import { Sun, Moon } from "lucide-react";
 
 export const Home = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -12,7 +11,7 @@ export const Home = () => {
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const { state } = useUserContext();
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -36,45 +35,32 @@ export const Home = () => {
 
   return (
     <div
-      className={`min-h-screen p-4 ${
+      className={`min-h-screen p-4 pt-20 ${
         theme === "light" ? "bg-white" : "bg-blue-900 text-white"
-      } transition-colors duration-300`}
+      } transition-colors duration-300 font-[Poppins]`}
     >
       <div className="max-w-4xl mx-auto">
-        <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold text-black dark:text-white">
-            User Directory
-          </h1>
-          <button
-            onClick={toggleTheme}
-            className={`flex items-center px-3 py-1 bg-orange-500 text-white rounded-md text-sm hover:bg-orange-600 transition`}
-          >
-            {theme === "light" ? (
-              <Moon className="w-4 h-4 mr-1" />
-            ) : (
-              <Sun className="w-4 h-4 mr-1" />
-            )}
-            {theme === "light" ? "Dark" : "Light"} Mode
-          </button>
-        </div>
+        <h1 className="text-2xl font-bold mb-4 text-black dark:text-white font-[Poppins]">
+          User Directory
+        </h1>
         <input
           type="text"
           placeholder="Search users..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className={`w-full p-2 mb-4 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 ${
+          className={`w-full p-2 mb-4 border rounded-md text-sm font-normal focus:outline-none focus:ring-2 focus:ring-orange-500 font-[Poppins] ${
             theme === "light"
               ? "bg-white border-gray-300 text-black"
               : "bg-blue-800 border-blue-700 text-white"
           }`}
         />
         {loading && (
-          <div className="text-center text-sm text-black dark:text-white">
+          <div className="text-center text-sm font-normal text-black dark:text-white font-[Poppins]">
             Loading...
           </div>
         )}
         {error && (
-          <div className="text-center text-orange-600 dark:text-orange-500 text-sm">
+          <div className="text-center text-orange-600 dark:text-orange-500 text-sm font-normal font-[Poppins]">
             {error}
           </div>
         )}
@@ -85,17 +71,17 @@ export const Home = () => {
                 key={user.id}
                 className={`p-3 rounded-md ${
                   theme === "light" ? "bg-gray-100" : "bg-blue-800"
-                }`}
+                } font-[Poppins]`}
               >
-                <h3 className="text-base font-semibold text-black dark:text-white">
+                <h3 className="text-base font-semibold text-black dark:text-white font-[Poppins]">
                   {user.name}
                 </h3>
-                <p className="text-sm text-black dark:text-white">
+                <p className="text-sm font-normal text-black dark:text-white font-[Poppins]">
                   {user.email}
                 </p>
                 <Link to={`/users/${user.id}`}>
                   <button
-                    className={`mt-2 px-3 py-1 bg-orange-500 text-white rounded-md text-sm hover:bg-orange-600 transition`}
+                    className="mt-2 px-3 py-1 bg-orange-500 text-white rounded-md text-sm font-medium hover:bg-orange-600 transition font-[Poppins]"
                   >
                     View Profile
                   </button>
